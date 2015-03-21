@@ -1,8 +1,8 @@
 /**
- * @author abyss / http://DD3DVw.abyssss.com/
+ * @author abyss / http://www.abyssss.com/
  */
 
-DD3DV.Studio = function (parameters) {
+DD3DV.Scenario = function (parameters) {
 
     this.showPlace = parameters.showPlace;
     this.clientWidth = this.showPlace.width();
@@ -32,9 +32,9 @@ DD3DV.Studio = function (parameters) {
 
 
 
-DD3DV.Studio.prototype = {
+DD3DV.Scenario.prototype = {
 
-    constructor: DD3DV.Studio,
+    constructor: DD3DV.Scenario,
 
     makeDefaultSkyBox: function() {
         var skyBoxGeometry = new THREE.BoxGeometry( 1000, 1000, 1000 );

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="lib/jquery/jquery-1.9.1.min.js"></script>
+    <script src="lib/three/three.js"></script>
+    <script src="lib/three/tools/Tween.js"></script>
+    <script src="DD3DV/dd3dv.js"></script>   
+</head>
+<body>
+<div style="height:600px"  id="canvas-frame">
+</div>
+</body>
+<script>
+        var myStudio;
+        var requestId;
+        var centerPoint;
+        var mouse ={x:0,y:0};
+        var myWordNet;
+
+        var count;
+
+        function myRender() {
+            requestAnimationFrame(myRender);
+            myWordNet.update(mouse.x,mouse.y);
+            myStudio.renderer.render(myStudio.scene, myStudio.camera)    
+        }
+
+        function onMouseMove(event) {
+
+            event.preventDefault();
+
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        }
+
+        function init()
+        {
+            count = 0;
+
+    centerPoint = new THREE.Vector3(0,0,0);
+
+    var domElementId = "canvas-frame";
+
+    var inputParameters_studio = {showPlace:$("#" + domElementId)};
+    myStudio = new DD3DV.Scenario(inputParameters_studio);
+
+    myWordNet = new DD3DV.WordsNet({
+        camera:myStudio.camera,
+        scene:myStudio.scene,
+        domElementId:domElementId});
+
+    myWordNet.initWordsNet();
+
+    myStudio.renderer.domElement.addEventListener( 'mousemove', onMouseMove, false );
+
+    var parameter1 = {word:"测试字符串A",name:"001",position:new THREE.Vector3(0,20,0),
+        description:"你在搞笑么？"};
+    var WordNode1 = new DD3DV.WordNode(parameter1);
+    myWordNet.add(WordNode1);
+
+    var parameter2 = {word:"二",name:"002",position:new THREE.Vector3(20,0,10),
+        description:"如果可能的话我也不想这样的。可是没办法。我爸妈都比较笨。笨是显性基因。"};
+    var WordNode2 = new DD3DV.WordNode(parameter2);
+    myWordNet.add(WordNode2);
+
+    var parameter3 = {word:"醉了",name:"003",position:new THREE.Vector3(0,0,-50),
+        description:"就说你呢。"};
+    var WordNode3 = new DD3DV.WordNode(parameter3);
+    myWordNet.add(WordNode3);
+
+    var parameter4 = {word:"周六加班",name:"004",position:new THREE.Vector3(20,-20,-30),
+        description:"看见这个还点？你事受虐狂？"};
+    var WordNode4 = new DD3DV.WordNode(parameter4);
+    myWordNet.add(WordNode4);
+
+    myWordNet.addWordNetToScene();
+        }
+
+        init();
+
+        myRender();
+    </script>
+</html>

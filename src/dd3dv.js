@@ -10,3 +10,5 @@
  */
 
 var DD3DV = { REVISION: "1" };
+
+DD3DV.ResourceBasePath = "htdocs/assets/";
